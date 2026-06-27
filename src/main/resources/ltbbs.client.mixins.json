@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"package": "com.larisa.ltbbs.mixin.client",
+	"compatibilityLevel": "JAVA_17",
+	"client": [
+		"BlockFormRendererMixin",
+		"UIBlockFormPanelMixin",
+		"UIBlockStateEditorMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

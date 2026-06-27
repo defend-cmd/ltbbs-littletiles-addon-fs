@@ -1,0 +1,27 @@
+{
+	"schemaVersion": 1,
+	"id": "ltbbs",
+	"version": "${version}",
+	"name": "LittleTiles BBS Addon",
+	"description": "Lets BBS 'Block' models display LittleTiles structures captured from a held LittleTiles item.",
+	"authors": [
+		"larisa"
+	],
+	"license": "MIT",
+	"environment": "*",
+	"entrypoints": {
+	},
+	"mixins": [
+		"ltbbs.mixins.json",
+		{
+			"config": "ltbbs.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.15.0",
+		"minecraft": "=1.20.1",
+		"java": ">=17",
+		"bbs": "*"
+	}
+}

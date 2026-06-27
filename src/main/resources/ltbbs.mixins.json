@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "com.larisa.ltbbs.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"BlockFormMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
