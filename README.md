@@ -1,27 +1,12 @@
 # LittleTiles BBS FS Addon
 
-An addon for BBS FS 2.6 that adds a LittleTiles structure catalog to the BBS dashboard and
-makes BBS Block forms render LittleTiles structures instead of an empty block.
+An addon for BBS FS 2.6 that makes BBS Block Forms render LittleTiles structures instead of
+an empty block.
 
 Normally a BBS Block form only stores a `BlockState`. When it renders, it spawns a fresh,
 empty block entity, so picking a LittleTiles block shows nothing — the actual geometry lives
 in the block entity's NBT, which the form never keeps. This addon captures the held
 LittleTiles item and renders that, so the build actually shows up.
-
-## Dashboard catalog
-
-Open the BBS dashboard and select the **LittleTiles** tab in its bottom panel bar. The tab
-contains a personal catalog stored in `config/ltbbs-littletiles-catalog.json`.
-
-1. Copy a placed LittleTiles structure to an item (middle-click it in Creative mode).
-2. Hold that item in your main hand.
-3. In the LittleTiles tab, click **Create from held item**.
-4. Select an entry to issue another copy with **Give selected structure**, or remove it with
-   **Delete selected**.
-
-The item is sent to the server for validation and is only issued if it is a LittleTiles item
-with structure data. This works in singleplayer and multiplayer when the addon is installed
-on both the client and server.
 
 ## BBS Block forms
 
@@ -40,11 +25,13 @@ trick is just to hold onto that item and draw it.
 All of this is done with `@Pseudo` mixins targeting BBS classes by name, so there's no
 compile-time dependency on LittleTiles itself.
 
-1. Select a LittleTiles structure from the dashboard catalog and use **Give selected structure**.
-2. Create or edit a Block form in BBS FS.
+1. Copy a placed LittleTiles structure to an item and put it in one of the nine hotbar slots.
+2. Create or edit a **Block** form in BBS FS.
+3. Click **Choose block**.
+4. Click the LittleTiles structure in the picker hotbar at the bottom of the picker.
 
-The catalog is the supported workflow for BBS FS 2.6. Its structure entries are preserved and
-can be re-issued at any time.
+The addon preserves the complete item NBT on the Block Form and the structure renders in the
+form preview and in the world. Choosing a regular block keeps BBS's normal block behaviour.
 
 The form now renders the structure. Pick a regular block to go back to normal behaviour.
 

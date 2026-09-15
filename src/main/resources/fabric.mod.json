@@ -3,20 +3,13 @@
 	"id": "ltbbs",
 	"version": "${version}",
 	"name": "LittleTiles BBS FS Addon",
-	"description": "A LittleTiles structure catalog and BBS Block Form integration for BBS FS 2.6.",
+	"description": "Lets BBS FS Block Forms render LittleTiles structures selected from the block picker.",
 	"authors": [
 		"larisa"
 	],
 	"license": "MIT",
 	"environment": "*",
-	"entrypoints": {
-		"main": [
-			"com.larisa.ltbbs.LTBBS"
-		],
-		"client": [
-			"com.larisa.ltbbs.LTBBSClient"
-		]
-	},
+	"entrypoints": {},
 	"mixins": [
 		"ltbbs.mixins.json",
 		{
