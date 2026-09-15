@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Base64;
 
 import net.minecraft.item.ItemStack;
@@ -53,5 +55,43 @@ public final class LittleTilesUtil {
         } catch (Exception e) {
             return ItemStack.EMPTY;
         }
+    }
+
+    /**
+     * LittleTiles keeps the original selection's minimum grid coordinate in a structure.
+     * Its item model uses that coordinate as-is. BBS Block Forms are anchored to one block,
+     * so normalize the structure's minimum corner to that anchor before rendering it.
+     */
+    public static float[] getStructureMin(ItemStack stack) {
+        float[] origin = new float[] {0.0F, 0.0F, 0.0F};
+
+        if (!isLittleTilesBuild(stack)) {
+            return origin;
+        }
+
+        try {
+            Class<?> placerClass = Class.forName("team.creative.littletiles.api.common.tool.ILittlePlacer");
+            if (!placerClass.isInstance(stack.getItem())) {
+                return origin;
+            }
+
+            Method getTiles = placerClass.getMethod("getTiles", ItemStack.class);
+            Object group = getTiles.invoke(stack.getItem(), stack);
+            if (group == null) {
+                return origin;
+            }
+
+            Object minimum = group.getClass().getMethod("getMinVec").invoke(group);
+            Object grid = group.getClass().getMethod("getGrid").invoke(group);
+            Field pixelLength = grid.getClass().getField("pixelLength");
+            double scale = pixelLength.getDouble(grid);
+
+            origin[0] = (float) (minimum.getClass().getField("x").getInt(minimum) * scale);
+            origin[1] = (float) (minimum.getClass().getField("y").getInt(minimum) * scale);
+            origin[2] = (float) (minimum.getClass().getField("z").getInt(minimum) * scale);
+        } catch (ReflectiveOperationException ignored) {
+        }
+
+        return origin;
     }
 }

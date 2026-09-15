@@ -36,6 +36,8 @@ public abstract class BlockFormRendererMixin {
     private String ltbbs$lastData;
     @Unique
     private ItemStack ltbbs$cached = ItemStack.EMPTY;
+    @Unique
+    private float[] ltbbs$structureMin = new float[] {0.0F, 0.0F, 0.0F};
 
     @SuppressWarnings("rawtypes")
     private BlockForm ltbbs$form() {
@@ -57,6 +59,7 @@ public abstract class BlockFormRendererMixin {
         if (!data.equals(this.ltbbs$lastData)) {
             this.ltbbs$lastData = data;
             this.ltbbs$cached = LittleTilesUtil.decode(data);
+            this.ltbbs$structureMin = LittleTilesUtil.getStructureMin(this.ltbbs$cached);
         }
 
         return this.ltbbs$cached == null || this.ltbbs$cached.isEmpty() ? null : this.ltbbs$cached;
@@ -78,7 +81,8 @@ public abstract class BlockFormRendererMixin {
         int light = context.light;
 
         context.stack.push();
-        context.stack.translate(-0.5F, 0.0F, -0.5F);
+        context.stack.translate(-0.5F - this.ltbbs$structureMin[0], -this.ltbbs$structureMin[1],
+                -0.5F - this.ltbbs$structureMin[2]);
         CustomVertexConsumerProvider.hijackVertexFormat(l -> RenderSystem.enableBlend());
 
         Color set = (Color) form.color.get();
@@ -115,7 +119,8 @@ public abstract class BlockFormRendererMixin {
         MatrixStackUtils.multiply(matrices, uiMatrix);
         float scale = (Float) form.uiScale.get();
         matrices.scale(scale, scale, scale);
-        matrices.translate(-0.5F, 0.0F, -0.5F);
+        matrices.translate(-0.5F - this.ltbbs$structureMin[0], -this.ltbbs$structureMin[1],
+                -0.5F - this.ltbbs$structureMin[2]);
         matrices.peek().getNormalMatrix().getScale(Vectors.EMPTY_3F);
         matrices.peek().getNormalMatrix().scale(1.0F / Vectors.EMPTY_3F.x, -1.0F / Vectors.EMPTY_3F.y, 1.0F / Vectors.EMPTY_3F.z);
 
