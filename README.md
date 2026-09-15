@@ -32,8 +32,7 @@ compile-time dependency on LittleTiles itself.
 
 The addon preserves the complete item NBT on the Block Form and the structure renders in the
 form preview and in the world. The complete LittleTiles bounds are centered horizontally on
-the BBS form origin, while their lowest edge is placed exactly at ground level. The renderer
-also compensates for LittleTiles' one-block item-model offset on both horizontal axes.
+the BBS form origin, while their lowest edge is placed exactly at ground level.
 Choosing a regular block keeps BBS's normal block behaviour.
 
 The form now renders the structure. Pick a regular block to go back to normal behaviour.
