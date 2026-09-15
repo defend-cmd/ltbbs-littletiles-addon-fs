@@ -2,14 +2,20 @@
 	"schemaVersion": 1,
 	"id": "ltbbs",
 	"version": "${version}",
-	"name": "LittleTiles BBS Addon",
-	"description": "Lets BBS 'Block' models display LittleTiles structures captured from a held LittleTiles item.",
+	"name": "LittleTiles BBS FS Addon",
+	"description": "A LittleTiles structure catalog and BBS Block Form integration for BBS FS 2.6.",
 	"authors": [
 		"larisa"
 	],
 	"license": "MIT",
 	"environment": "*",
 	"entrypoints": {
+		"main": [
+			"com.larisa.ltbbs.LTBBS"
+		],
+		"client": [
+			"com.larisa.ltbbs.LTBBSClient"
+		]
 	},
 	"mixins": [
 		"ltbbs.mixins.json",
