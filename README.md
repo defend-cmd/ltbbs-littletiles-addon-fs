@@ -42,7 +42,9 @@ compile-time dependency on LittleTiles itself.
 
 1. Select a LittleTiles structure from the dashboard catalog and use **Give selected structure**.
 2. Create or edit a Block form in BBS FS.
-3. Open the block picker and choose the issued LittleTiles item from your inventory.
+
+The catalog is the supported workflow for BBS FS 2.6. Its structure entries are preserved and
+can be re-issued at any time.
 
 The form now renders the structure. Pick a regular block to go back to normal behaviour.
 

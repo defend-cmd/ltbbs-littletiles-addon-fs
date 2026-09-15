@@ -4,8 +4,7 @@
 	"compatibilityLevel": "JAVA_17",
 	"client": [
 		"BlockFormRendererMixin",
-		"UIBlockFormPanelMixin",
-		"UIBlockStateEditorMixin"
+		"UIBlockFormPanelMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
