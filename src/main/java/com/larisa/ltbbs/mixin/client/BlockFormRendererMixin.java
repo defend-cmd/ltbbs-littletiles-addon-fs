@@ -81,7 +81,7 @@ public abstract class BlockFormRendererMixin {
         int light = context.light;
 
         context.stack.push();
-        context.stack.translate(-1.0F - this.ltbbs$structureMin[0], -0.5F - this.ltbbs$structureMin[1],
+        context.stack.translate(-this.ltbbs$structureMin[0], 0.5F - this.ltbbs$structureMin[1],
                 -0.5F - this.ltbbs$structureMin[2]);
         CustomVertexConsumerProvider.hijackVertexFormat(l -> RenderSystem.enableBlend());
 
@@ -119,7 +119,7 @@ public abstract class BlockFormRendererMixin {
         MatrixStackUtils.multiply(matrices, uiMatrix);
         float scale = (Float) form.uiScale.get();
         matrices.scale(scale, scale, scale);
-        matrices.translate(-1.0F - this.ltbbs$structureMin[0], -0.5F - this.ltbbs$structureMin[1],
+        matrices.translate(-this.ltbbs$structureMin[0], 0.5F - this.ltbbs$structureMin[1],
                 -0.5F - this.ltbbs$structureMin[2]);
         matrices.peek().getNormalMatrix().getScale(Vectors.EMPTY_3F);
         matrices.peek().getNormalMatrix().scale(1.0F / Vectors.EMPTY_3F.x, -1.0F / Vectors.EMPTY_3F.y, 1.0F / Vectors.EMPTY_3F.z);
