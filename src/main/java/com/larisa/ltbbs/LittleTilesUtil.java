@@ -58,40 +58,49 @@ public final class LittleTilesUtil {
     }
 
     /**
-     * LittleTiles keeps the original selection's minimum grid coordinate in a structure.
-     * Its item model uses that coordinate as-is. BBS Block Forms are anchored to one block,
-     * so normalize the structure's minimum corner to that anchor before rendering it.
+     * Returns the structure-space point that must be placed at the BBS form origin:
+     * the horizontal center of the complete LittleTiles bounds and its lowest Y edge.
      */
-    public static float[] getStructureMin(ItemStack stack) {
-        float[] origin = new float[] {0.0F, 0.0F, 0.0F};
+    public static float[] getStructureAnchor(ItemStack stack) {
+        float[] anchor = new float[] {0.5F, 0.0F, 0.5F};
 
         if (!isLittleTilesBuild(stack)) {
-            return origin;
+            return anchor;
         }
 
         try {
             Class<?> placerClass = Class.forName("team.creative.littletiles.api.common.tool.ILittlePlacer");
             if (!placerClass.isInstance(stack.getItem())) {
-                return origin;
+                return anchor;
             }
 
             Method getTiles = placerClass.getMethod("getTiles", ItemStack.class);
             Object group = getTiles.invoke(stack.getItem(), stack);
             if (group == null) {
-                return origin;
+                return anchor;
             }
 
-            Object minimum = group.getClass().getMethod("getMinVec").invoke(group);
+            Object bounds = group.getClass().getMethod("getSurroundingBox").invoke(group);
             Object grid = group.getClass().getMethod("getGrid").invoke(group);
+            if (bounds == null || grid == null) {
+                return anchor;
+            }
+
             Field pixelLength = grid.getClass().getField("pixelLength");
             double scale = pixelLength.getDouble(grid);
 
-            origin[0] = (float) (minimum.getClass().getField("x").getInt(minimum) * scale);
-            origin[1] = (float) (minimum.getClass().getField("y").getInt(minimum) * scale);
-            origin[2] = (float) (minimum.getClass().getField("z").getInt(minimum) * scale);
+            int minX = bounds.getClass().getField("minX").getInt(bounds);
+            int minY = bounds.getClass().getField("minY").getInt(bounds);
+            int minZ = bounds.getClass().getField("minZ").getInt(bounds);
+            int maxX = bounds.getClass().getField("maxX").getInt(bounds);
+            int maxZ = bounds.getClass().getField("maxZ").getInt(bounds);
+
+            anchor[0] = (float) ((minX + maxX) * scale * 0.5D);
+            anchor[1] = (float) (minY * scale);
+            anchor[2] = (float) ((minZ + maxZ) * scale * 0.5D);
         } catch (ReflectiveOperationException ignored) {
         }
 
-        return origin;
+        return anchor;
     }
 }

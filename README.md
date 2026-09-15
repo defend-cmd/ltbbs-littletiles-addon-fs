@@ -31,8 +31,8 @@ compile-time dependency on LittleTiles itself.
 4. Click the LittleTiles structure in the picker hotbar at the bottom of the picker.
 
 The addon preserves the complete item NBT on the Block Form and the structure renders in the
-form preview and in the world. It uses the BBS Block Form anchor and preserves the
-structure's saved LittleTiles origin.
+form preview and in the world. The complete LittleTiles bounds are centered horizontally on
+the BBS form origin, while their lowest edge is placed exactly at ground level.
 Choosing a regular block keeps BBS's normal block behaviour.
 
 The form now renders the structure. Pick a regular block to go back to normal behaviour.
