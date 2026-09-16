@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "com.larisa.ltbbs.mixin",
+	"package": "com.kuboeb.ltbbs.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
 		"BlockFormMixin"

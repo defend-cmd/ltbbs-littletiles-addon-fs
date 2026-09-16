@@ -1,10 +1,10 @@
-package com.larisa.ltbbs.client;
+package com.kuboeb.ltbbs.client;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import com.larisa.ltbbs.mixin.client.ItemRendererInvoker;
+import com.kuboeb.ltbbs.mixin.client.ItemRendererInvoker;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.TexturedRenderLayers;
@@ -17,7 +17,6 @@ import net.minecraft.util.math.random.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** Geometry in the original LittleTiles block coordinates, before inventory normalization. */
 public final class LittleTilesMesh {
     private static final Logger LOGGER = LoggerFactory.getLogger("ltbbs");
     private final ItemStack stack;
@@ -50,8 +49,6 @@ public final class LittleTilesMesh {
                 Random.class, boolean.class, List.class);
         Object[] faces = (Object[]) facing.getField("VALUES").get(null);
 
-        // LittleModelItemTilesBig.getBoxes calls shrinkCubesToOneBlock. Its cached item
-        // quads have already lost the original center and size, so use the group directly.
         List<BakedQuad> solid = compile(getBoxes.invoke(group, false), faces, compile,
                 TexturedRenderLayers.getEntityCutout());
         List<BakedQuad> translucent = compile(getBoxes.invoke(group, true), faces, compile,
@@ -61,7 +58,6 @@ public final class LittleTilesMesh {
         return new LittleTilesMesh(stack, solid, translucent);
     }
 
-    // Log actual compiled vertices once per mesh, not inferred item bounds or screen offsets.
     private static float[] bounds(List<BakedQuad> solid, List<BakedQuad> translucent) {
         float[] bounds = {Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY,
                 Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY};
@@ -103,8 +99,6 @@ public final class LittleTilesMesh {
             return;
         }
         VertexConsumer consumer = consumers.getBuffer(layer);
-        // Use Minecraft's tint/vertex handling without renderItem's model transform
-        // and unconditional (-0.5, -0.5, -0.5) translation.
         ((ItemRendererInvoker) MinecraftClient.getInstance().getItemRenderer())
                 .ltbbs$renderQuads(matrices, consumer, quads, stack, light, overlay);
     }

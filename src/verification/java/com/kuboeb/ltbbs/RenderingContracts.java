@@ -1,4 +1,4 @@
-package com.larisa.ltbbs;
+package com.kuboeb.ltbbs;
 
 import java.io.File;
 import java.io.InputStream;
@@ -19,10 +19,9 @@ import org.objectweb.asm.commons.MethodRemapper;
 import org.objectweb.asm.commons.SimpleRemapper;
 import org.objectweb.asm.tree.*;
 
-/** Offline contract/coordinate checks, not a substitute for an in-game GPU test. */
 public final class RenderingContracts implements Opcodes {
     private static final String BBS = "mchorse/bbs_mod/forms/renderers/BlockFormRenderer";
-    private static final String MIXIN = "com/larisa/ltbbs/mixin/client/BlockFormRendererMixin";
+    private static final String MIXIN = "com/kuboeb/ltbbs/mixin/client/BlockFormRendererMixin";
     private static final String GRID = "team/creative/littletiles/common/grid/LittleGrid";
     private static final String BOX = "team/creative/littletiles/common/math/box/LittleBox";
     private static final String RENDER_BOX = "team/creative/littletiles/client/render/tile/LittleRenderBox";
@@ -58,14 +57,14 @@ public final class RenderingContracts implements Opcodes {
         for (int axis = 0; axis < 3; axis++) netOffset[axis] = blockOrigin[axis] + worldOffsets.get(0)[axis];
         close(netOffset, new float[]{0, 0, 0});
         noTransforms(mixin);
-        ClassNode mesh = read(addon, "com/larisa/ltbbs/client/LittleTilesMesh");
+        ClassNode mesh = read(addon, "com/kuboeb/ltbbs/client/LittleTilesMesh");
         noTransforms(mesh);
         require(constants(mesh).containsAll(List.of("getTiles", "getRenderingBoxes", "compileBoxes")),
                 "Mesh must get raw group boxes and compile them directly");
         require(!constants(mesh).contains("shrinkCubesToOneBlock"), "Inventory normalization reintroduced");
         System.out.println("PASS: remapped BBS hook signature; shared world/UI block space; no addon offsets");
 
-        ClassNode invoker = read(Path.of(args[4]), "com/larisa/ltbbs/mixin/client/ItemRendererInvoker");
+        ClassNode invoker = read(Path.of(args[4]), "com/kuboeb/ltbbs/mixin/client/ItemRendererInvoker");
         MethodNode invoke = method(invoker, "ltbbs$renderQuads", null);
         ClassNode itemRenderer = findClass(args[5], "net/minecraft/client/render/item/ItemRenderer");
         MethodNode quads = method(itemRenderer, "renderBakedItemQuads", invoke.desc);
@@ -90,8 +89,6 @@ public final class RenderingContracts implements Opcodes {
     }
 
     private static void checkGeometry(Path lt, float[] offset) throws Exception {
-        // Execute the installed LittleGrid conversion and LittleRenderBox constructor
-        // bytecode. Only surrounding game types are replaced by data-only stubs.
         String testGrid = "ltbbs/verification/InstalledGrid", testBox = "ltbbs/verification/InstalledBox";
         SimpleRemapper names = new SimpleRemapper(Map.of(GRID, testGrid, BOX, Type.getInternalName(SourceBox.class),
                 RENDER_BOX, testBox, "team/creative/creativecore/client/render/box/RenderBox", Type.getInternalName(RawBox.class),

@@ -1,4 +1,4 @@
-package com.larisa.ltbbs;
+package com.kuboeb.ltbbs;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

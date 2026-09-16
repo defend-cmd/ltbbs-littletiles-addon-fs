@@ -1,4 +1,4 @@
-package com.larisa.ltbbs.mixin.client;
+package com.kuboeb.ltbbs.mixin.client;
 
 import java.util.List;
 import net.minecraft.client.render.VertexConsumer;

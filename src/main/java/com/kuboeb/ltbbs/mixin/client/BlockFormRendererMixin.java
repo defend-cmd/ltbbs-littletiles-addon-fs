@@ -1,8 +1,8 @@
-package com.larisa.ltbbs.mixin.client;
+package com.kuboeb.ltbbs.mixin.client;
 
-import com.larisa.ltbbs.ILittleTilesBlockForm;
-import com.larisa.ltbbs.LittleTilesUtil;
-import com.larisa.ltbbs.client.LittleTilesMesh;
+import com.kuboeb.ltbbs.ILittleTilesBlockForm;
+import com.kuboeb.ltbbs.LittleTilesUtil;
+import com.kuboeb.ltbbs.client.LittleTilesMesh;
 import mchorse.bbs_mod.forms.renderers.FormRenderer;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
@@ -30,8 +30,6 @@ public abstract class BlockFormRendererMixin {
     @Unique
     private LittleTilesMesh ltbbs$mesh;
 
-    // Both render3D and renderInUI call this after applying BBS's block origin.
-    // Keeping those wrappers also preserves BBS lighting, overlays and picking.
     @Inject(method = "renderBlock", at = @At("HEAD"), cancellable = true)
     private void ltbbs$renderStructure(MatrixStack matrices, VertexConsumerProvider consumers,
                                       int light, int overlay, boolean picking, CallbackInfo ci) {

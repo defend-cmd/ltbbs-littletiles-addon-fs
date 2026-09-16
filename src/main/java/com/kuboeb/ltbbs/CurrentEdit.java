@@ -1,4 +1,4 @@
-package com.larisa.ltbbs;
+package com.kuboeb.ltbbs;
 
 import mchorse.bbs_mod.forms.forms.BlockForm;
 

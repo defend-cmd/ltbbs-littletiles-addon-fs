@@ -1,8 +1,8 @@
-package com.larisa.ltbbs.mixin.client;
+package com.kuboeb.ltbbs.mixin.client;
 
-import com.larisa.ltbbs.CurrentEdit;
-import com.larisa.ltbbs.ILittleTilesBlockForm;
-import com.larisa.ltbbs.LittleTilesUtil;
+import com.kuboeb.ltbbs.CurrentEdit;
+import com.kuboeb.ltbbs.ILittleTilesBlockForm;
+import com.kuboeb.ltbbs.LittleTilesUtil;
 import mchorse.bbs_mod.forms.forms.BlockForm;
 import mchorse.bbs_mod.settings.values.core.ValueString;
 import mchorse.bbs_mod.ui.framework.UIContext;

@@ -1,6 +1,6 @@
-package com.larisa.ltbbs.mixin;
+package com.kuboeb.ltbbs.mixin;
 
-import com.larisa.ltbbs.ILittleTilesBlockForm;
+import com.kuboeb.ltbbs.ILittleTilesBlockForm;
 import mchorse.bbs_mod.forms.forms.BlockForm;
 import mchorse.bbs_mod.settings.values.core.ValueString;
 import org.spongepowered.asm.mixin.Mixin;

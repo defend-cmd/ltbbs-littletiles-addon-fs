@@ -5,7 +5,7 @@
 	"name": "LittleTiles BBS FS Addon",
 	"description": "Lets BBS FS Block Forms render LittleTiles structures selected from the block picker.",
 	"authors": [
-		"larisa"
+		"kuboeb"
 	],
 	"license": "MIT",
 	"environment": "*",

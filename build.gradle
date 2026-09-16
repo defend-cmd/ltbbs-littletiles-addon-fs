@@ -43,7 +43,7 @@ tasks.register('verifyRendering', JavaExec) {
 	description = 'Check mod APIs and original geometry without starting Minecraft.'
 	dependsOn remapJar, verificationClasses
 	classpath = sourceSets.verification.runtimeClasspath
-	mainClass = 'com.larisa.ltbbs.RenderingContracts'
+	mainClass = 'com.kuboeb.ltbbs.RenderingContracts'
 	doFirst {
 		args = [
 			file(project.findProperty('bbs_fs_jar') ?: 'libs/bbs-2.6-1.20.1.jar'),

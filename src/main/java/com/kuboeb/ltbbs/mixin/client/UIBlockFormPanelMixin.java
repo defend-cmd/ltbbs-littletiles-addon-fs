@@ -1,6 +1,6 @@
-package com.larisa.ltbbs.mixin.client;
+package com.kuboeb.ltbbs.mixin.client;
 
-import com.larisa.ltbbs.CurrentEdit;
+import com.kuboeb.ltbbs.CurrentEdit;
 import mchorse.bbs_mod.forms.forms.BlockForm;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
